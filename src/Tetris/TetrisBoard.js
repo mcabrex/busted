@@ -6,6 +6,7 @@ class TetrisBoard extends Component {
     super();
     this.state = {
       positionArr: [],
+      //positionArr is gonna hold the coordinates of the piece itself, relative to the row(s) it's on
       rowInd: 0,
       boardMap: []
       //boarMap array holds array of rows, saved and set to state every time a piece reaches it's bottom most position 
@@ -15,33 +16,50 @@ class TetrisBoard extends Component {
   }
 
   componentDidMount() {
-    //initial position of falling block
+    //initial position of falling block to center of tetris board
     this.setState({
       positionArr: [5]
     });
   }
   handleClick(evt) {
+    //a large amount of the logic is gonn have to be here at the start button, seperate into different file?
     //pieces start falling down on click
     this.setState({
       positionArr: [5]
     });
-    for (let i = 0; i < 17; i++) {
-      //17 is the height of the tetris board, important to use let to keep i scoped for each setTimeOut
-      setTimeout(() => {
-        this.setState({
-          //positionArr to keep track of falling piece coordinates on the array
-          rowInd: i
-          //rowInd equal to i to give appearance of falling down later
-        });
-        if(i===17){
-            //last iteration
+    //whole page recognizes runs key events ==> clicking start will always reset everything and put block position back to center
+    setInterval(()=>{
+      const {rowInd,positionArr} = this.state
+      const newRowInd = rowInd === 17 ? 0 : rowInd+1
+      const newPositionArr = rowInd === 17 ? [5] : positionArr
+      console.log(rowInd,newRowInd)
+      this.setState({
+        positionArr: newPositionArr,
+        rowInd: newRowInd
+      })
+    },400)
+    // for (let i = 0; i < 17; i++) {
+    //   //need this to keep track of rows to know when to stop!
+    //     //every time it runs this it has to check two things, what the next row is and what the position of the current piece is
+    //     //so, if the next rows space is occupied by any of the current pieces positions stop the piece right there
+    //       //always gonna go from top to bottom so only have to work on the bottom most array and work from there?
+    //   //17 is the height of the tetris board, important to use 'let' to keep i scoped for each setTimeOut
+    //   setTimeout(() => {
+    //     this.setState({
+    //       rowInd: i
+    //       //rowInd equal to i to give appearance of falling down later
+    //         //reset loop every time? gonna have to be real precise with data management due to setTimeout
+    //     });
+    //     if(i===17){
+    //         //last iteration
 
-        }
-      }, 400 * i);
-    }
+    //     }
+    //   }, 400 * i);
+    // }
   }
 
   handleKeyPress(evt) {
+    //
     console.log("key evt", evt.key);
     let { positionArr } = this.state;
     let left = positionArr[0] - 1;
