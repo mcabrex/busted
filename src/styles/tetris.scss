@@ -1,0 +1,27 @@
+.tetris {
+    &-board {
+        margin: 0 auto;
+        margin-top: 20vh;
+        vertical-align: middle;
+        height: fit-content;
+        width: 30vh;
+        &-row {
+            display: flex;
+        }
+        &-piece {
+            &-inactive {
+                background-color: limegreen;
+                border: solid;
+                height: 3vh;
+                width: 3vh;    
+            }
+            &-blue {
+                background-color: blue;
+                border: solid;
+                height: 3vh;
+                width: 3vh;    
+            }
+        }
+        
+    }
+}
