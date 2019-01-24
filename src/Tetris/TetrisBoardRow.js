@@ -7,15 +7,22 @@ class TetrisBoardRow extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-  }
   render() {
     const row = () => {
       const piecesArr = [];
-      const { position } = this.props;
-      for (let i = 0; i < 11; i++) {
-        if (position && position.length > 0 && position[0] === i) piecesArr.push(<TetrisBoardPiece key={i} activeColor="blue"/>);
-        else piecesArr.push(<TetrisBoardPiece key={i} />);
+      const { position,row } = this.props;
+      console.log('row',row)
+      const rowMaker = (tetrisRow) => {
+        tetrisRow.forEach((tile,ind)=>{
+          if(tile){
+            piecesArr.push(<TetrisBoardPiece key={ind} activeColor="blue"/>);
+          } else {
+            piecesArr.push(<TetrisBoardPiece key={ind} />);
+          }
+        })
+      }
+      if(row && row.length > 0){
+        rowMaker(row)
       }
       return piecesArr;
     };

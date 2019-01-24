@@ -3,21 +3,21 @@ import TetrisBoardRow from "./TetrisBoardRow";
 import { TetrisContext } from "../contexts/Tetris/TetrisContext";
 
 class TetrisBoard extends Component {
+  componentDidMount(){
+    console.log(this.props.boardMap)
+    
+  }
   render() {
     return (
       <TetrisContext.Consumer>
-        {({ handleKeyPress, handleStart, rowInd, positionArr }) => {
+        {({ handleKeyPress, handleStart, rowInd, positionArr, boardMap }) => {
           const board = () => {
             const boardArr = [];
-            for (let i = 0; i < 17; i++) {
-              if (rowInd === i) {
+            boardMap.forEach((row,ind) => {
                 boardArr.push(
-                  <TetrisBoardRow key={i} position={positionArr} />
-                );
-              } else {
-                boardArr.push(<TetrisBoardRow key={i} />);
-              }
-            }
+                  <TetrisBoardRow key={ind} row={row} position={positionArr} />
+                )
+            })
             return boardArr;
           };
           return (
