@@ -11,7 +11,6 @@ class TetrisBoardRow extends Component {
     const row = () => {
       const piecesArr = [];
       const { row } = this.props;
-      console.log('row',row)
       const rowMaker = (tetrisRow) => {
         tetrisRow.forEach((tile,ind)=>{
           if(tile){

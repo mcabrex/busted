@@ -22,8 +22,10 @@ let TetrisState = {
         [0,0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0,0],
         [1,1,1,1,1,1,1,1,1,1,1]
-    ]
+    ],
     //boarMap array holds array of rows, saved and set to state every time a piece reaches it's bottom most position
+    timer: {},
+    stopped: false
 }
 
 export default TetrisState
