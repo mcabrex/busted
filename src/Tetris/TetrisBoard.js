@@ -3,10 +3,6 @@ import TetrisBoardRow from "./TetrisBoardRow";
 import { TetrisContext } from "../contexts/Tetris/TetrisContext";
 
 class TetrisBoard extends Component {
-  componentDidMount(){
-    console.log(this.props.boardMap)
-    
-  }
   render() {
     return (
       <TetrisContext.Consumer>
@@ -14,7 +10,9 @@ class TetrisBoard extends Component {
           const board = () => {
             const boardArr = [];
             boardMap.forEach((row,ind) => {
+              //load an array of rows based off the boardMap from the state
                 boardArr.push(
+                  //pass down the row layout of the board as well as position of the current piece
                   <TetrisBoardRow key={ind} row={row} position={positionArr} />
                 )
             })

@@ -14,33 +14,15 @@ export class TetrisProvider extends React.Component {
     });
     //whole page recognizes runs key events ==> clicking start will always reset everything and put block position back to center
     setInterval(() => {
-      //set interval runs this function continuously
-      //need this to keep track of rows to know when to stop!
-      //every time it runs this it has to check two things, what the next row is and what the position of the current piece is
-      //so, if the next rows space is occupied by any of the current pieces positions stop the piece right there
-      //always gonna go from top to bottom so only have to work on the bottom most array and work from there?
+      //set interval runs this function continuously on start
+      //every time it runs this it has to check two things, what the next row is and where the current piece is
+      //so, if the next row's space is occupied by any of the current pieces positions stop the piece right there
       const { rowInd, positionArr, boardMap } = this.state;
-      const newBoard = boardMap
+      let newBoard = [
+        ...boardMap
+      ]
       const nextRow = newBoard[rowInd +1]
-      // console.log(rowInd,boardMap)
-      if(nextRow){
-        //first check, are there any blocks at the NEXT layer (does the next layer even exist on the boardMap?)
-        //this check should start happening every time after the first
-        console.log('1check',newBoard,nextRow)
-        if(nextRow.indexOf(positionArr[0]) > -1){
-          //second check, if it exists, will there be collision on the next row given the current board piece?
-          //if so save the current position to the current row
-          // ~~~NOTE~~~ move this logic to a boolean variable outside for a more complex check
-          newBoard[rowInd] = [...positionArr]
-          // console.log('2check')
-
-        } else {
-          //if there won't be a collision and the nextRow exists you've reached here
-          newBoard[rowInd+1].push(...positionArr)
-          console.log('newBoard',newBoard[rowInd+1])
-        }
-      } 
-
+      
       const newRowInd = rowInd === 17 ? 0 : rowInd + 1;
       const newPositionArr = rowInd === 17 ? [5] : positionArr;
       //reset at end baseline (17 being height of board)

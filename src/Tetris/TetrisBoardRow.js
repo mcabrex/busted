@@ -10,11 +10,12 @@ class TetrisBoardRow extends Component {
   render() {
     const row = () => {
       const piecesArr = [];
-      const { position,row } = this.props;
+      const { row } = this.props;
       console.log('row',row)
       const rowMaker = (tetrisRow) => {
         tetrisRow.forEach((tile,ind)=>{
           if(tile){
+            //row of tiles set to 0 or 1, color blue if active
             piecesArr.push(<TetrisBoardPiece key={ind} activeColor="blue"/>);
           } else {
             piecesArr.push(<TetrisBoardPiece key={ind} />);
@@ -22,6 +23,7 @@ class TetrisBoardRow extends Component {
         })
       }
       if(row && row.length > 0){
+        //make sure row is initialized first
         rowMaker(row)
       }
       return piecesArr;
