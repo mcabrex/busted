@@ -65,16 +65,25 @@ export class TetrisProvider extends React.Component {
   };
 
   handleStop = evt => {
-    const {initialBoard} = this.state
-    const newBoard = initialBoard.slice(0)
-    console.log("board", initialBoard);
-    this.state.timer.reset();
-    this.state.timer.stop();
-    this.setState({
-      boardMap: newBoard,
-      positionArr: [5],
-      rowInd: 0
-    });
+    let tileState = 0
+    let topLayers = Array.from({length: 8}, curr => curr = 0)
+    const bottomLayers = Array.from({length: 9}, curr => curr = 1)
+    const newBoard = []
+    for(let i = 0; i < 18; i++){
+      if(i === 17) newBoard.push(bottomLayers)
+      else newBoard.push(topLayers)
+    }
+    console.log("newBoard", newBoard,tileState);
+    console.log("timer", this.state.timer);
+    if(this.state.timer.runCount > 0){
+      this.state.timer.reset();
+      this.state.timer.stop();
+      this.setState({
+        boardMap: newBoard,
+        positionArr: [5],
+        rowInd: 0
+      });
+    }
   };
 
   render() {
