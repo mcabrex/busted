@@ -16,6 +16,7 @@ class TetrisBoard extends Component {
         }) => {
           const board = () => {
             const boardArr = [];
+            console.log('boardMap',boardMap)
             boardMap.forEach((row, ind) => {
               //load an array of rows based off the boardMap from the state
               boardArr.push(
